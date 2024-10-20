@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TV Series :D</title>
+    <!-- Add Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* Estilo global */
+        body {
+            font-family: 'Times New Roman', serif;
+            background-color: #f8f9fa;
+            color: #333;
+        }
+
+        /* Estilo para el header */
+        header {
+            background-color: #000000;
+            padding: 20px;
+            color: rgb(255, 255, 255);
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2.5rem;
+            font-weight: bold;
+        }
+
+        /* Estilo para el navbar */
+        .navbar {
+            background-color: #af5bd6;
+        }
+
+        .navbar-brand {
+            font-weight: bold;
+        }
+
+        /* Estilo para el texto de promedio */
+        .table-footer {
+            font-weight: bold;
+            background-color: #f1f1f1;
+        }
+
+        /* Estilo para la columna derecha */
+        .detail-container {
+            border-left: 1px solid #ddd;
+            padding-left: 20px;
+        }
+
+        /* Estilo para la card */
+        .card {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <header class="text-center">
+        <h1>Welcome to TV Series Page</h1>
+        
+    </header>
+
+    <div class="container mt-5">
+        <div class="row">
+            <!-- Columna para la tabla -->
+            <div class="col-md-8">
+                <h1 class="mb-4">TV Series</h1>
+                <table class="table table-striped">
+                    <thead>
+                      <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Channel</th>
+                        <th scope="col">Seasons</th>
+                      </tr>
+                    </thead>
+                    <tbody id="seriesTableBody">
+                    </tbody>
+                    <tfoot>
+                      <tr class="table-footer">
+                        <td colspan="3" class="text-right">Average Seasons:</td>
+                        <td id="averageSeasons"></td>
+                      </tr>
+                    </tfoot>
+                  </table>
+            </div>
+
+            <!-- Columna para mostrar los detalles de la serie -->
+            <div class="col-md-4 detail-container">
+                <h2>Serie Details</h2>
+                <!-- Aquí se mostrará el card con los detalles -->
+                <div id="serieDetailCard" class="card" style="display: none;">
+                    <div class="card-body">
+                        <h5 class="card-title" id="serieName"></h5>
+                        <h6 class="card-subtitle mb-2 text-muted" id="serieChannel"></h6>
+                        <p class="card-text">Number of seasons: <span id="serieSeasons"></span></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Agrega tu archivo de datos directamente en el mismo script -->
+    <script>
+        const series = [
+            { id: 1, name: 'Stranger Things', channel: 'Netflix', seasons: 4 },
+            { id: 2, name: 'Breaking Bad', channel: 'AMC', seasons: 5 },
+            { id: 3, name: 'The Crown', channel: 'Netflix', seasons: 6 },
+            { id: 4, name: 'The Mandalorian', channel: 'Disney+', seasons: 3 },
+            { id: 5, name: 'Game of Thrones', channel: 'HBO', seasons: 8 },
+            { id: 6, name: 'The Office', channel: 'NBC', seasons: 9 },
+        ];
+
+        const seriesTableBody = document.getElementById('seriesTableBody');
+        const serieDetailCard = document.getElementById('serieDetailCard');
+        let totalSeasons = 0;
+
+        // Función para mostrar los detalles de una serie
+        function showSerieDetails(serie) {
+            document.getElementById('serieName').innerText = serie.name;
+            document.getElementById('serieChannel').innerText = serie.channel;
+            document.getElementById('serieSeasons').innerText = serie.seasons;
+
+            // Mostrar la card con los detalles
+            serieDetailCard.style.display = 'block';
+        }
+
+        // Generar filas de la tabla y habilitar clics en las series
+        series.forEach(serie => {
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                <th scope="row">${serie.id}</th>
+                <td>${serie.name}</td>
+                <td>${serie.channel}</td>
+                <td>${serie.seasons}</td>
+            `;
+
+            // Agregar evento de clic para mostrar detalles
+            row.addEventListener('click', () => showSerieDetails(serie));
+
+            seriesTableBody.appendChild(row);
+            totalSeasons += serie.seasons; // Acumula el número de temporadas
+        });
+
+        // Calcula el promedio de temporadas
+        const averageSeasons = (totalSeasons / series.length).toFixed(2);
+
+        // Muestra el promedio en el tfoot
+        document.getElementById('averageSeasons').innerText = averageSeasons;
+    </script>
+</body>
+</html>
