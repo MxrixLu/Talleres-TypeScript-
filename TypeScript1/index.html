@@ -27,12 +27,25 @@
             font-weight: bold;
         }
 
+        /* Estilo para el navbar */
+        .navbar {
+            background-color: #d19191;
+        }
 
+        .navbar-brand {
+            font-weight: bold;
+        }
+
+        /* Estilo para el texto de promedio */
+        .table-footer {
+            font-weight: bold;
+            background-color: #f1f1f1;
+        }
     </style>
 </head>
 <body>
     <header class="text-center">
-        <h1> TV Series Page</h1>
+        <h1>Welcome to TV Series Page</h1>
         
     </header>
 
@@ -49,6 +62,12 @@
             </thead>
             <tbody id="seriesTableBody">
             </tbody>
+            <tfoot>
+              <tr class="table-footer">
+                <td colspan="3" class="text-right">Average Seasons:</td>
+                <td id="averageSeasons"></td>
+              </tr>
+            </tfoot>
           </table>
     </div>
 
@@ -64,6 +83,7 @@
         ];
 
         const seriesTableBody = document.getElementById('seriesTableBody');
+        let totalSeasons = 0;
 
         series.forEach(serie => {
             const row = document.createElement('tr');
@@ -74,7 +94,14 @@
                 <td>${serie.seasons}</td>
             `;
             seriesTableBody.appendChild(row);
+            totalSeasons += serie.seasons; // Acumula el número de temporadas
         });
+
+        // Calcula el promedio de temporadas
+        const averageSeasons = (totalSeasons / series.length).toFixed(2);
+
+        // Muestra el promedio en el tfoot
+        document.getElementById('averageSeasons').innerText = averageSeasons;
     </script>
 </body>
 </html>
