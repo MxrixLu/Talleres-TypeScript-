@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TV Series</title>
+    <!-- Add Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="mb-4">TV Series</h1>
+        <table class="table table-striped">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Name</th>
+                <th scope="col">Channel</th>
+                <th scope="col">Seasons</th>
+              </tr>
+            </thead>
+            <tbody id="seriesTableBody">
+            </tbody>
+          </table>
+    </div>
+
+    <!-- Agrega tu archivo de datos directamente en el mismo script -->
+    <script>
+        const series = [
+            { id: 1, name: 'Stranger Things', channel: 'Netflix', seasons: 4 },
+            { id: 2, name: 'Breaking Bad', channel: 'AMC', seasons: 5 },
+            { id: 3, name: 'The Crown', channel: 'Netflix', seasons: 6 },
+            { id: 4, name: 'The Mandalorian', channel: 'Disney+', seasons: 3 },
+            { id: 5, name: 'Game of Thrones', channel: 'HBO', seasons: 8 },
+            { id: 6, name: 'The Office', channel: 'NBC', seasons: 9 },
+        ];
+
+        const seriesTableBody = document.getElementById('seriesTableBody');
+
+        series.forEach(serie => {
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                <th scope="row">${serie.id}</th>
+                <td>${serie.name}</td>
+                <td>${serie.channel}</td>
+                <td>${serie.seasons}</td>
+            `;
+            seriesTableBody.appendChild(row);
+        });
+    </script>
+</body>
+</html>
